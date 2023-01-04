@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+       <!--Main Content-->
+       <div class="my-5">
+        <div class="mx-auto w-25 " style="max-width:100%;">
+          <h2 class="text-center mb-3">Update</h2>
+          <form  [formGroup]="form" (ngSubmit)="submit()" >
+         <div>
+            <!--Email-->
+            <label for="">Prenom</label>
+            <input type="text" class="form-control" value="" required formControlName="prenom" id="prenom" name="prenom" placeholder="Saisir le prenom de l'etudiant">
+          </div>
+          
+          <div >
+            <label for="exampleInputPassword1">Nom</label>
+            <input name="nom"  type="text" required class="form-control" formControlName="nom" id="nom" placeholder="Saisir le nom de l'etudiant">
+          </div>
+
+           
+              
+
+           
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <button [disabled]="!form.valid" class="btn btn-primary w-100 mt-4" type="submit" value="Submit">Mettre a jour !</button>
+              </div>
+            </div>
+  
+            <div>
+              
+            </div>
+          </form>
+    
+        </div>
+      </div>
+</body>
+</html>

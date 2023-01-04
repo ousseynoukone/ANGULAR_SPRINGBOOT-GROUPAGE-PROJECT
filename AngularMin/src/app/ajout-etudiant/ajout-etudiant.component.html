@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div  #alert class="alert  alert-success text-center" hidden role="alert">
+    Etudiant ajouter avec sucess ! 
+  </div>
+
+  <div  #alert1 class="alert  alert-danger text-center" hidden role="alert">
+    Veuillez remplir les champs ! 
+  </div>
+
+
+    <div class="container">
+        <div class="card mt-4 col-md-10 offset-1">
+    
+            <div class="card-body bg-dark text-white " >
+
+
+              <form [formGroup]="form" (ngSubmit)="submit()">
+                <div >
+                      <label for="">Prenom</label>
+                      <input type="text" class="form-control" required formControlName="prenom" id="prenom" name="prenom" placeholder="Saisir le prenom de l'etudiant">
+                    </div>
+                    
+                    <div >
+                      <label for="exampleInputPassword1">Nom</label>
+                      <input name="nom"  type="text" required class="form-control" formControlName="nom" id="nom" placeholder="Saisir le nom de l'etudiant">
+                    </div>
+
+<div class="col-md-2 offset-5 mt-2">
+
+  <div class="row">
+    <div class="col-md-12 form-group">
+      <input  class="btn btn-primary w-100" type="submit" value="Ajouter">
+    </div>
+    <div class="my-3 col-md-12">
+      <a href="http://localhost:4200/etudiants"><button type="button" class="btn btn-primary">Liste des etudiants</button></a>
+  </div>
+  </div>
+</div>
+
+                  </form>
+
+    
+        </div>
+    </div>
+</div>
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="mt-5">
+        <div class="card-header">
+        <h1 class="text-center">Listes des etudiants</h1>
+    </div>
+        <div class="container">
+            <div class="card-body col-md-10 offset-1">
+            <!--Add User Button-->
+            <div class="m-3">
+                <a href="http://localhost:4200/ajout"><button type="button" class="btn btn-dark">Ajouter etudiant</button></a>
+            </div>
+            <div class="container">
+            <table class="table table-dark col-md-3" >
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col " colspan="" >Prenom</th>
+                    <th scope="col">Actions a faire</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let et of etudiants">
+                    <td>{{et.id}}</td>
+                    <td>{{et.nom}}</td>
+                    <td>{{et.prenom}}</td>
+
+                    <td>
+                        
+                        <div class="d-inline mx-2">
+                            <button class="btn btn-warning"  (click)="updateEtudiant(et.id)" type="button"> <img height="25px" src="../../assets/update.png" > </button>
+                        </div> 
+                        <div class="d-inline">
+                          <button class="btn btn-danger" (click)="deleteEtudiant(et.id)" type="button"><img height="25px" src="../../assets/delete.png" ></button>
+                        </div> 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+<router-outlet></router-outlet>
+
+
+
+
+

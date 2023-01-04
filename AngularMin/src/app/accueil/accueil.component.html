@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+    <div class="card mt-4">
+        <div class="card-header text-center bg-primary  text-white">Accueil</div>
+
+        <div class="card-body " >
+
+
+
+
+            <div class="row">
+                <button (click)="loadGroupes()" class="btn btn-primary col-md-2 mt-4 offset-5"> Former les groupes et les sujets</button >
+            </div>
+        </div>
+
+    </div>
+
+    
+
+      
+</div>
+
+
+
+
+
+
+
+
+      <table class="table table-striped table-bordered">
+        <thead>
+
+
+          <tr scope="col" *ngFor="let group of groupsForm.controls.groups.value; let i = index">
+            <td>Groupe : {{ i + 1 }}</td>
+            <td>
+              <ng-container *ngFor="let sujets of sujetForm.controls.sujet.value ">
+                <ng-container *ngFor="let sujet of sujets; let j = index">
+                  <ng-container *ngIf="j === i">
+                    sujet : 
+                    {{ sujet.text }}
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </td>
+            <td *ngFor="let student of group">
+              {{ student.prenom+" "+student.nom}} 
+            </td>
+            <td>
+            </td>
+          </tr>
+          
+          
+
+
+
+
+        </thead>
+
+      </table>
+      
+
+</body>
+</html>
