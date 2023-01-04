@@ -1,6 +1,6 @@
 # devopsProject---Copie
 
-Once project cloned , do not for scaffolding : 
+Once project cloned , do not forget scaffolding : 
 
       For spring boot => mvn clean install 
 
