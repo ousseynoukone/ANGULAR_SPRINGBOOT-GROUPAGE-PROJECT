@@ -1,6 +1,7 @@
 package com.isi.devopsProject.Models;
 import jakarta.persistence.*;
 
+
 @Entity
 @Table
 public class Sujet {

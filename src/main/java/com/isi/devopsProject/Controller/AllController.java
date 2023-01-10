@@ -2,7 +2,6 @@ package com.isi.devopsProject.Controller;
 
 import com.isi.devopsProject.Models.Etudiant;
 import com.isi.devopsProject.Models.Sujet;
-import com.isi.devopsProject.repository.IEtudiantrepository;
 import com.isi.devopsProject.services.IEtudiantService;
 import com.isi.devopsProject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;

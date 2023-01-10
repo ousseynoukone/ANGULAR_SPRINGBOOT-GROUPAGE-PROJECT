@@ -1,7 +1,6 @@
 package com.isi.devopsProject.services;
 
 import com.isi.devopsProject.Models.Sujet;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
