@@ -23,15 +23,6 @@ public class AllController {
     @Autowired
     private ISujetService sujetService;
 
-    @GetMapping("/Accueil")
-    public ResponseEntity<Object> getDataFromTables() {
-        // Récupérez les données de vos deux tables ici
-        List<Etudiant> tabEtudiant = IEtudiantService.gettudiants();
-        List<Sujet> tabSujet = sujetService.getSujets();
-        Map<String, Object> data = new HashMap<>();
-        data.put("tabEtudiant", tabEtudiant);
-        data.put("tabSujet", tabSujet);
-        return ResponseEntity.ok(data);
-    }
+
 
 }
