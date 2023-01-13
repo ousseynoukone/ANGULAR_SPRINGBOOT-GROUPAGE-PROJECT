@@ -1,7 +1,7 @@
 package com.isi.devopsProject.config;
 
 import com.isi.devopsProject.services.ISujetService;
-import com.isi.devopsProject.services.ISujetServiceImpl;
+import com.isi.devopsProject.services.SujetServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class beanConfigSujet {
     @Bean
     public ISujetService sujetService() {
-        ISujetService sService = new ISujetServiceImpl();
+        ISujetService sService = new SujetServiceImpl();
         return sService;
     }
 }

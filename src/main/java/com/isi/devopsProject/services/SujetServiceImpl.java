@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class ISujetServiceImpl implements ISujetService {
+public class SujetServiceImpl implements ISujetService {
     @Autowired
     public ISujetRepository sujetRepository;
 

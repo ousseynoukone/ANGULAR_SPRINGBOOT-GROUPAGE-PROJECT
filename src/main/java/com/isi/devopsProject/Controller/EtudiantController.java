@@ -26,7 +26,7 @@ public class EtudiantController {
 
 
 //Shuffle fonction
-    public  Map<String , Object> ShuffledAndGroupedEtudiants(List <Etudiant> lEtudiants ,List <Sujet> lSujet){
+    public static  Map<String , Object> ShuffledAndGroupedEtudiants(List <Etudiant> lEtudiants ,List <Sujet> lSujet){
 
 
     if(lSujet.isEmpty()==false && lEtudiants.isEmpty()==false){
@@ -35,16 +35,16 @@ public class EtudiantController {
     Collections.shuffle(lSujet);
     
         // Calculer le nombre maximum d'étudiants par groupe
-   //     int maxPerGroup = (int) Math.ceil((double) el.size() / sl.size());
+        int maxPerGroup = (int) Math.ceil((double) lEtudiants.size() / lSujet.size());
     
-        int maxPerGroup = 10; // Taille maximale des groupes d'étudiants
-        int nb_groupes = (int) Math.ceil((double) lEtudiants.size() / maxPerGroup); // nombre de groupes nécessaires
+    //    int maxPerGroup = 10; // Taille maximale des groupes d'étudiants
+        int nb_groupes = (int) Math.ceil((double) lEtudiants.size() / maxPerGroup ); // nombre de groupes nécessaires
         
         // Diviser les étudiants en groupes
         List<List<Etudiant>> groups = new ArrayList<>();
         for (int i = 0; i < nb_groupes; i++) {
             int j = i*maxPerGroup;
-            int k = Math.min((i + 1) * maxPerGroup, lEtudiants.size());
+            int k = Math.min((i + 1) * maxPerGroup,lEtudiants.size()) ;
             groups.add(lEtudiants.subList(j, k));
         }
 
@@ -62,8 +62,7 @@ public class EtudiantController {
 
 
     
-    private List <Etudiant> el = IEtudiantService.gettudiants();
-    private List <Sujet> sl  = ISujetService.getSujets();
+
 /* 
     @GetMapping("/Accueil")
     public ResponseEntity<Object> getDataFromTables() {
@@ -78,9 +77,32 @@ public class EtudiantController {
 */
     @GetMapping("/groupe")
     public Map<String, Object> getGroupe() {
+        List <Etudiant> el = IEtudiantService.gettudiants();
+        List <Sujet> sl  = ISujetService.getSujets();
 
-        return this.ShuffledAndGroupedEtudiants(el,sl);
+        Map<String, Object> map = new HashMap<>();
+
+        map=EtudiantController.ShuffledAndGroupedEtudiants(el,sl);
+
+        List<List<Etudiant>> groups = (List<List<Etudiant>>) map.get("groupesEtudiants");
+        List<Sujet> lSujet = (List<Sujet>) map.get("sujets");
+
+        int index = 0;
+        for (List<Etudiant> group : groups) {
+            for (Etudiant e : group) {
+                e.setIdGroupe(lSujet.get(index).getId());
+                IEtudiantService.updateEtudiant(e, e.getId());
+            }
+            index++;
+            if(index == lSujet.size()){
+              break ;
+            }
+        }
+
+        return EtudiantController.ShuffledAndGroupedEtudiants(el,sl);
     }
+
+
 
 
 
