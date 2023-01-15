@@ -99,7 +99,11 @@ public class EtudiantController {
             }
         }
 
-        return EtudiantController.ShuffledAndGroupedEtudiants(el,sl);
+        map = new HashMap<>();
+        map.put("groupesEtudiants", groups);
+        map.put("sujets", lSujet);
+
+        return map;
     }
 
 

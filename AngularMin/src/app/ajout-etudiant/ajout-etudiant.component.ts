@@ -30,7 +30,6 @@ export class AjoutEtudiantComponent implements OnInit {
   ngOnInit(): void {
   }
 
-//recuper l'element par l'id
 @ViewChild('alert', { static: true }) alert: ElementRef;
 @ViewChild('alert1', { static: true }) alert1: ElementRef;
   

@@ -34,38 +34,35 @@
 
 
 
+<div  #alert class="alert col-md-12 alert-success text-center mt-3"  hidden role="alert">
+  Chargement...
+</div>
+<table  #tab hidden class="table table-striped bg-secondary table-bordered table-dark mt-3">
+  <thead>
 
-      <table class="table table-striped table-bordered">
-        <thead>
+    <tr>
 
+      <th>Groupe</th>
+      <th>Sujet</th>
+      <th>Etudiants</th>
+    </tr>
+  </thead>
 
-          <tr scope="col" *ngFor="let group of groupsForm.controls.groups.value; let i = index">
-            <td>Groupe : {{ i + 1 }}</td>
-            <td>
-              <ng-container *ngFor="let sujets of sujetForm.controls.sujet.value ">
-                <ng-container *ngFor="let sujet of sujets; let j = index">
-                  <ng-container *ngIf="j === i">
-                    sujet : 
-                    {{ sujet.text }}
-                  </ng-container>
-                </ng-container>
-              </ng-container>
-            </td>
-            <td *ngFor="let student of group">
-              {{ student.prenom+" "+student.nom}} 
-            </td>
-            <td>
-            </td>
-          </tr>
-          
-          
+  <tbody>
+    <ng-container *ngFor="let group of tabGroupeEtudiantSujet; let i = index">
+      <tr>
+        <td>Groupe {{i + 1}}</td>
+        <li type="square">{{group[1].sujet.text}}</li>
+        <td>
+          <ng-container *ngFor="let student of group[0].groupeEtudiant">
+            <li>  {{student.prenom}} {{student.nom}} </li>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
 
-
-
-
-        </thead>
-
-      </table>
       
 
 </body>
