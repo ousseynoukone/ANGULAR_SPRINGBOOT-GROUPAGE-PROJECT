@@ -12,6 +12,7 @@ import { UpdateEtudiantComponent } from './update-etudiant/update-etudiant.compo
 import { ListerSujetComponent } from './lister-sujet/lister-sujet.component';
 import { AjouterSujetComponent } from './ajouter-sujet/ajouter-sujet.component';
 import { UpdateSujetComponent } from './update-sujet/update-sujet.component';
+import { GroupeComponent } from './groupe/groupe.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { UpdateSujetComponent } from './update-sujet/update-sujet.component';
     UpdateEtudiantComponent,
     ListerSujetComponent,
     AjouterSujetComponent,
-    UpdateSujetComponent
+    UpdateSujetComponent,
+    GroupeComponent
   ],
   imports: [
     FormsModule,

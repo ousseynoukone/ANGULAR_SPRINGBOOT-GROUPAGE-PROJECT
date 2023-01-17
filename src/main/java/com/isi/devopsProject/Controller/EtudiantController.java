@@ -7,6 +7,9 @@ import com.isi.devopsProject.services.ISujetService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
+import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +25,8 @@ public class EtudiantController {
     private IEtudiantService IEtudiantService;
     @Autowired
     private ISujetService ISujetService;
+
+    private Map<String, Object> map = new HashMap<>();
 
 
 
@@ -48,11 +53,11 @@ public class EtudiantController {
             groups.add(lEtudiants.subList(j, k));
         }
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("groupesEtudiants", groups);
-        map.put("sujets", lSujet);
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("groupesEtudiants", groups);
+        map1.put("sujets", lSujet);
 
-        return map;        }
+        return map1;        }
 
         else 
             return   new HashMap<>();
@@ -63,29 +68,17 @@ public class EtudiantController {
 
     
 
-/* 
-    @GetMapping("/Accueil")
-    public ResponseEntity<Object> getDataFromTables() {
-        // Récupérez les données de vos deux tables ici
-        List<Etudiant> tabEtudiant = IEtudiantService.gettudiants();
-        List<Sujet> tabSujet = ISujetService.getSujets();
-        Map<String, Object> data = new HashMap<>();
-        data.put("tabEtudiant", tabEtudiant);
-        data.put("tabSujet", tabSujet);
-        return ResponseEntity.ok(data);
-    }
-*/
+
     @GetMapping("/groupe")
-    public Map<String, Object> getGroupe() {
+    public List<Map<String,Object>> getGroupe() {
+    
         List <Etudiant> el = IEtudiantService.gettudiants();
         List <Sujet> sl  = ISujetService.getSujets();
 
-        Map<String, Object> map = new HashMap<>();
+        this.map = ShuffledAndGroupedEtudiants(el, sl);
 
-        map=EtudiantController.ShuffledAndGroupedEtudiants(el,sl);
-
-        List<List<Etudiant>> groups = (List<List<Etudiant>>) map.get("groupesEtudiants");
-        List<Sujet> lSujet = (List<Sujet>) map.get("sujets");
+        List<List<Etudiant>> groups = (List<List<Etudiant>>) this.map.get("groupesEtudiants");
+        List<Sujet> lSujet = (List<Sujet>) this.map.get("sujets");
 
         int index = 0;
         for (List<Etudiant> group : groups) {
@@ -95,16 +88,128 @@ public class EtudiantController {
             }
             index++;
             if(index == lSujet.size()){
+
               break ;
+
             }
+        } 
+        
+
+
+
+        sl = (List<Sujet>) this.map.get("sujets");
+        
+
+// cAR SHUFFLEANDGROUPEETUDIANT RENVOIT UNE LISTE DE LISTE D'ETUDIANT 
+        List<List<Etudiant>> etuDeconcatenner = (List<List<Etudiant>>) this.map.get("groupesEtudiants");
+        List<Etudiant> concatenatedListE = new ArrayList<>();
+        for (List<Etudiant> subList : etuDeconcatenner) {
+        concatenatedListE.addAll(subList);
         }
 
-        map = new HashMap<>();
-        map.put("groupesEtudiants", groups);
-        map.put("sujets", lSujet);
+        
 
-        return map;
+
+        List<Map<String,Object>> m1 = groupage(concatenatedListE, sl);
+     
+
+        return m1 ;
     }
+
+
+
+
+
+
+
+    @GetMapping("/listeGroupe")
+    public  List<Map<String,Object>> loadGroupe() {
+        List<Etudiant> el = IEtudiantService.gettudiants();
+        List<Sujet> sujets = ISujetService.getSujets();
+
+        return groupage(el, sujets);
+
+
+    }
+
+
+    //groupage
+    private List<Map<String,Object>> groupage(List<Etudiant> el ,List<Sujet> sujets ){
+        List<Map<String,Object>> listOfMapOfList = new ArrayList<>();
+        for (Sujet s : sujets) {
+
+            var  check = false ;
+
+            ArrayList<Etudiant> dataE = new ArrayList<>();
+            ArrayList<Sujet> dataL = new ArrayList<>();
+            Map<String, Object> dataMap = new HashMap<>();
+
+
+            for (Etudiant e : el) {
+                    if (e.geIdGroupe() == s.getId()) {
+                        dataE.add( e);
+                        if(check == false){
+                          dataL.add(s);
+                          check = true;
+                        }
+                    }
+                }
+        if(ObjectUtils.isEmpty(dataE)==false && ObjectUtils.isEmpty(dataL)==false ){
+            dataMap.put("groupe", dataE);
+            dataMap.put("sujet", dataL); 
+    
+            listOfMapOfList.add(dataMap);
+        }
+      
+
+    
+    }
+        
+        // groupData contient maintenant les données de la vue
+        
+    
+        return listOfMapOfList;
+    }
+    
+
+
+
+
+
+
+
+    //Enregistrer groupe
+    @GetMapping("/enregGroupe")
+    public ResponseEntity<String> enregGroupe() {
+        
+        List<List<Etudiant>> groups = (List<List<Etudiant>>) this.map.get("groupesEtudiants");
+        List<Sujet> lSujet = (List<Sujet>) this.map.get("sujets");
+
+        int index = 0;
+        for (List<Etudiant> group : groups) {
+            for (Etudiant e : group) {
+                e.setIdGroupe(lSujet.get(index).getId());
+                IEtudiantService.updateEtudiant(e, e.getId());
+            }
+            index++;
+            if(index == lSujet.size()){
+
+              break ;
+
+            }
+        }   
+
+        return new ResponseEntity<>("success!", HttpStatus.OK);
+
+
+    }
+
+
+
+
+
+
+
 
 
 

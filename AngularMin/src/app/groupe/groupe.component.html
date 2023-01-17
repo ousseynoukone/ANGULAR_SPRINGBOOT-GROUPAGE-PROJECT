@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+
+    <div class="container">
+    <div class="card mt-4">
+        <div class="card-header text-center bg-primary  text-white">Groupe</div>
+</div>
+    </div>
+
+
+
+
+
+
+
+
+<div class="container">
+<table   class="table table-striped bg-secondary table-bordered table-dark mt-3">
+
+  <thead>
+
+    <tr>
+
+      <th>Groupe</th>
+      <th>Sujet</th>
+      <th>Etudiants</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <ng-container *ngFor="let group of this.tabGroupeEtudiantSujet; let i = index">
+      <tr>
+        <td>Groupe {{group[1][0].id}}</td>
+        <li type="square">{{group[1][0].text}}</li>
+        <td>
+            
+          <ng-container *ngFor="let student of group[0]">
+            <li>  {{student.prenom}} {{student.nom}} </li>
+          </ng-container>
+          
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+</div>
+
+</body>
+</html>
