@@ -34,6 +34,7 @@ public class EtudiantServiceImpl implements IEtudiantService {
         et.setPrenom(e.getPrenom());
         et.setNom(e.getNom());
         et.setIdGroupe(e.geIdGroupe());
+        et.setIdGroupeA(e.geIdGroupeA());
         return etuRepository.save(et);
     }
 

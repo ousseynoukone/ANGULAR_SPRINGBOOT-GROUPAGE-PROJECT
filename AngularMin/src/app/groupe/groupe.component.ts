@@ -23,7 +23,6 @@ export class GroupeComponent {
   
     const arrayofMap = new Map(Object.entries(data));
 
-    console.log(arrayofMap)
 
 
     arrayofMap.forEach(groupeDeGroupe => {
@@ -34,9 +33,14 @@ export class GroupeComponent {
       this.tabGroupeEtudiantSujet.push(tab)
           
         });
-        //Triage pour l'affichage
-        this.tabGroupeEtudiantSujet.sort((a, b) => a[1][0].id - b[1][0].id);
+        this.tabGroupeEtudiantSujet.sort((a, b) => (a[1][0].idGroupeA > b[1][0].idGroupeA) ? 1 : -1);
+
+     //   this.tabGroupeEtudiantSujet.forEach(group => group[1].sort((a: {idGroupeA: number}, b: {idGroupeA: number}) => a.idGroupeA - b.idGroupeA));
+
         console.log(this.tabGroupeEtudiantSujet)
+
+        //Triage pour l'affichage
+
 
         this.tabGroupeEtudiantSujet.forEach(group => {
           group[0] = group[0].sort((a: Etudiant, b: Etudiant) => a.nom.localeCompare(b.nom));

@@ -35,5 +35,6 @@ public class SujetServiceImpl implements ISujetService {
         Sujet e = sujetRepository.findById(id).get();
         e.setText(s.getText());
         e.setDescription(s.getDescription());
+        e.setIdGroupeA(s.getIdGroupeA());
         return sujetRepository.save(e);    }
 }

@@ -29,7 +29,7 @@ public class EtudiantController {
     private ISujetService ISujetService;
 
     private Map<String, Object> map = new HashMap<>();
-
+    private List<Map<String,Object>> groupa = new ArrayList<>();
 
 
 //Shuffle fonction
@@ -106,7 +106,7 @@ public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaul
         
 
 
-        List<Map<String,Object>> m1 = groupage(concatenatedListE, sl);
+        List<Map<String,Object>> m1 = groupage(concatenatedListE, sl,false);
      
 
         return m1 ;
@@ -123,15 +123,17 @@ public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaul
         List<Etudiant> el = IEtudiantService.gettudiants();
         List<Sujet> sujets = ISujetService.getSujets();
 
-        return groupage(el, sujets);
+
+        return groupage(el, sujets,true);
 
 
     }
 
 
     //groupage
-    private List<Map<String,Object>> groupage(List<Etudiant> el ,List<Sujet> sujets ){
+    private List<Map<String,Object>> groupage(List<Etudiant> el ,List<Sujet> sujets , @Nullable Boolean verif ){
         List<Map<String,Object>> listOfMapOfList = new ArrayList<>();
+        int cpt = 1 ;
         for (Sujet s : sujets) {
 
             var  check = false ;
@@ -143,6 +145,10 @@ public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaul
 
             for (Etudiant e : el) {
                     if (e.geIdGroupe() == s.getId()) {
+                        if(verif==false){
+                        e.setIdGroupeA(cpt);
+                        s.setIdGroupeA(cpt);
+                        }
                         dataE.add( e);
                         if(check == false){
                           dataL.add(s);
@@ -150,6 +156,8 @@ public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaul
                         }
                     }
                 }
+                cpt+=1;
+
         if(ObjectUtils.isEmpty(dataE)==false && ObjectUtils.isEmpty(dataL)==false ){
             dataMap.put("groupe", dataE);
             dataMap.put("sujet", dataL); 
@@ -163,7 +171,7 @@ public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaul
         
         // groupData contient maintenant les données de la vue
         
-    
+        this.groupa = listOfMapOfList;
         return listOfMapOfList;
     }
     
@@ -171,7 +179,7 @@ public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaul
 
 
 
-
+/*
 
 
     //Enregistrer groupe
@@ -200,9 +208,27 @@ public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaul
 
     }
 
+ */
 
+//enreg 2
 
+@GetMapping("/enregGroupe")
+    public ResponseEntity<String> enregGroupe() {
+        List<Map<String,Object>> groups = this.groupa;
 
+        for (Map<String,Object> group : groups) {
+            List<Etudiant> etudiants = (List<Etudiant>) group.get("groupe");
+            for (Etudiant e : etudiants) {
+                IEtudiantService.updateEtudiant(e, e.getId());
+            }
+            List<Sujet> subjects = (List<Sujet>) group.get("sujet");
+            for (Sujet s : subjects) {
+                ISujetService.updateSujet(s, s.getId());
+            }
+        }   
+
+        return new ResponseEntity<>("success!", HttpStatus.OK);
+    }
 
 
 

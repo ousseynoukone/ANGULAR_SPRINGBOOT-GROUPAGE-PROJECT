@@ -21,7 +21,7 @@ public class EtudiantCrudTest {
     
 
     private Etudiant createEtudiant(){
-        Etudiant e = new Etudiant("TestNom","TestPrenom",0);
+        Etudiant e = new Etudiant("TestNom","TestPrenom",0,0);
 
        return iService.createEtudiant(e);
 
@@ -68,7 +68,7 @@ public class EtudiantCrudTest {
         
     @Test void UpdateEtudiant(){
         Etudiant e = createEtudiant();
-        Etudiant e1 = new Etudiant("TestNom","TestPrenom",0);
+        Etudiant e1 = new Etudiant("TestNom","TestPrenom",0,0);
 
         iService.updateEtudiant(e1, e.getId());
 

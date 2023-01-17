@@ -12,9 +12,9 @@ public class GenerateEtudiantAndSujets {
 
         // Define the behavior of the getEtudiants method
         List<Etudiant> etudiants = new ArrayList<>();
-        etudiants.add(new Etudiant("Kone", "Ousseynou",0));
-        etudiants.add(new Etudiant("Random", "Personne",0));
-        etudiants.add(new Etudiant("Anyway", "Prenom",0));
+        etudiants.add(new Etudiant("Kone", "Ousseynou",0,0));
+        etudiants.add(new Etudiant("Random", "Personne",0,0));
+        etudiants.add(new Etudiant("Anyway", "Prenom",0,0));
   //      Mockito.when(mockEtudiantService.gettudiants()).thenReturn(etudiants);
 
         return etudiants;
@@ -26,9 +26,9 @@ public class GenerateEtudiantAndSujets {
 
         // Define the behavior of the getSubjects method
         List<Sujet> sujets = new ArrayList<>();
-        sujets.add(new Sujet("Math","Description  de math"));
-        sujets.add(new Sujet("Physique","Description de la physique"));
-        sujets.add(new Sujet("Chimie","Description de la chimie"));
+        sujets.add(new Sujet("Math","Description  de math",0));
+        sujets.add(new Sujet("Physique","Description de la physique",0));
+        sujets.add(new Sujet("Chimie","Description de la chimie",0));
  //       Mockito.when(mockEtudiantService.getSujets()).thenReturn(sujets);
 
         return sujets;

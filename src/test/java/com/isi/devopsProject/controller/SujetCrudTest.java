@@ -19,7 +19,7 @@ public class SujetCrudTest {
     
 
     private Sujet createSujet(){
-        Sujet s = new Sujet("TestTile","TestDescription");
+        Sujet s = new Sujet("TestTile","TestDescription",0);
 
        return iService.createSujet(s);
 
@@ -60,7 +60,7 @@ public class SujetCrudTest {
         
     @Test void UpdateSujet(){
         Sujet s = createSujet();
-        Sujet s1= new Sujet("test2Title","test2Description");
+        Sujet s1= new Sujet("test2Title","test2Description",0);
 
         iService.updateSujet(s1, s.getId());
 

@@ -121,6 +121,8 @@ loadAll()
     this.tabGroupeEtudiantSujet=[]
 
 
+
+
     arrayofMap.forEach(groupeDeGroupe => {
       let tab =[]
       tab.push(groupeDeGroupe['groupe'])
@@ -130,7 +132,7 @@ loadAll()
           
         });
         
-        this.tabGroupeEtudiantSujet.sort((a, b) => a[1][0].id - b[1][0].id);
+    //    this.tabGroupeEtudiantSujet.forEach(group => group[1].sort((a: {idGroupeA: number}, b: {idGroupeA: number}) => a.idGroupeA - b.idGroupeA));
 
         console.log(this.tabGroupeEtudiantSujet)
 
