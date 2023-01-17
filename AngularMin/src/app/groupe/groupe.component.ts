@@ -36,11 +36,12 @@ export class GroupeComponent {
         });
         //Triage pour l'affichage
         this.tabGroupeEtudiantSujet.sort((a, b) => a[1][0].id - b[1][0].id);
+        console.log(this.tabGroupeEtudiantSujet)
 
         this.tabGroupeEtudiantSujet.forEach(group => {
-        group[0] = group[0].sort((a: Etudiant, b: Etudiant) => a.nom.localeCompare(b.nom));
-        });
-        
+          group[0] = group[0].sort((a: Etudiant, b: Etudiant) => a.nom.localeCompare(b.nom));
+          });
+
 
 
 

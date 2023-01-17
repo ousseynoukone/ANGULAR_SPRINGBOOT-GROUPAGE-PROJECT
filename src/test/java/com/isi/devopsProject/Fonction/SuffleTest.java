@@ -32,7 +32,7 @@ public class SuffleTest {
         
 
 
-        Map<String , Object> result = EtudiantController.ShuffledAndGroupedEtudiants(el,sl);
+        Map<String , Object> result = EtudiantController.ShuffledAndGroupedEtudiants(el,sl,null);
 
         // Assert
         Assertions.assertThat(result).isNotNull();

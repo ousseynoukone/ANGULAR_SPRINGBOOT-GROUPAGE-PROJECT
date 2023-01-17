@@ -5,6 +5,8 @@ import com.isi.devopsProject.Models.Sujet;
 import com.isi.devopsProject.services.IEtudiantService;
 import com.isi.devopsProject.services.ISujetService;
 
+import io.micrometer.common.lang.Nullable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -31,18 +33,16 @@ public class EtudiantController {
 
 
 //Shuffle fonction
-    public static  Map<String , Object> ShuffledAndGroupedEtudiants(List <Etudiant> lEtudiants ,List <Sujet> lSujet){
-
-
+public static  Map<String , Object> ShuffledAndGroupedEtudiants(List <Etudiant> lEtudiants ,List <Sujet> lSujet , @Nullable Integer divise){
     if(lSujet.isEmpty()==false && lEtudiants.isEmpty()==false){
-
-    Collections.shuffle(lEtudiants);
-    Collections.shuffle(lSujet);
-    
+        Collections.shuffle(lEtudiants);
+        Collections.shuffle(lSujet);
         // Calculer le nombre maximum d'étudiants par groupe
-        int maxPerGroup = (int) Math.ceil((double) lEtudiants.size() / lSujet.size());
-    
-    //    int maxPerGroup = 10; // Taille maximale des groupes d'étudiants
+        int maxPerGroup;
+        if(divise!=null && divise!=0)
+            maxPerGroup = (int) Math.ceil((double) lEtudiants.size() / divise);
+        else
+            maxPerGroup = (int) Math.ceil((double) lEtudiants.size() / lSujet.size());
         int nb_groupes = (int) Math.ceil((double) lEtudiants.size() / maxPerGroup ); // nombre de groupes nécessaires
         
         // Diviser les étudiants en groupes
@@ -52,30 +52,26 @@ public class EtudiantController {
             int k = Math.min((i + 1) * maxPerGroup,lEtudiants.size()) ;
             groups.add(lEtudiants.subList(j, k));
         }
-
         Map<String, Object> map1 = new HashMap<>();
         map1.put("groupesEtudiants", groups);
         map1.put("sujets", lSujet);
 
-        return map1;        }
-
-        else 
-            return   new HashMap<>();
-
-    
+        return map1;        
+    }
+    else 
+        return new HashMap<>();
 }
 
 
     
 
 
-    @GetMapping("/groupe")
-    public List<Map<String,Object>> getGroupe() {
-    
+@GetMapping("/groupe")
+public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaultValue = "0") Integer divise){    
         List <Etudiant> el = IEtudiantService.gettudiants();
         List <Sujet> sl  = ISujetService.getSujets();
 
-        this.map = ShuffledAndGroupedEtudiants(el, sl);
+        this.map = ShuffledAndGroupedEtudiants(el, sl,divise);
 
         List<List<Etudiant>> groups = (List<List<Etudiant>>) this.map.get("groupesEtudiants");
         List<Sujet> lSujet = (List<Sujet>) this.map.get("sujets");

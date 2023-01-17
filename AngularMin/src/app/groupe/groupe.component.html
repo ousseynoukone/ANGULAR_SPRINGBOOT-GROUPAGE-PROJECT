@@ -40,7 +40,7 @@
   <tbody>
     <ng-container *ngFor="let group of this.tabGroupeEtudiantSujet; let i = index">
       <tr>
-        <td>Groupe {{group[1][0].id}}</td>
+        <td>Groupe {{i + 1}}</td>
         <li type="square">{{group[1][0].text}}</li>
         <td>
             

@@ -26,6 +26,19 @@
             <div class="row">
               <button #enreg (click)="enregGroupe()" class="btn btn-dark col-md-2  offset-9" hidden>Enregistrer</button >
           </div>
+          <div class="row">
+            <div class="row g-3 align-items-center">
+
+              <div class="col-auto">
+                <input type="number" #val min="1" max="10" id="inputPassword6" class="form-control" aria-describedby="div">
+              </div>
+              <div class="col-auto">
+                <span id="div" class="form-text">
+                  Combien de groupe voulez vous ?
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
     </div>
@@ -58,7 +71,7 @@
     <tbody>
       <ng-container *ngFor="let group of this.tabGroupeEtudiantSujet; let i = index">
         <tr>
-          <td>Groupe {{group[1][0].id}}</td>
+          <td>Groupe {{i + 1}}</td>
           <li type="square">{{group[1][0].text}}</li>
           <td>
               
