@@ -223,7 +223,7 @@ public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaul
             }
             List<Sujet> subjects = (List<Sujet>) group.get("sujet");
             for (Sujet s : subjects) {
-                ISujetService.updateSujet(s, s.getId());
+                ISujetService.updateSujet(s, s.getId() );
             }
         }   
 
