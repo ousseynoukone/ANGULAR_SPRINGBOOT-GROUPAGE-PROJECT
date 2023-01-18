@@ -14,6 +14,7 @@ export class UpdateSujetComponent {
   s?: Sujet
   data: any
 
+
   constructor(private service: AppService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -24,6 +25,8 @@ export class UpdateSujetComponent {
       this.form = new FormGroup({
         text: new FormControl(data.text, [Validators.required]),
         description: new FormControl(data.description, [Validators.required]),
+        idGroupeA : new FormControl(data.idGroupeA.toString()) 
+        
       })
     })
   }
@@ -33,6 +36,7 @@ export class UpdateSujetComponent {
   form = new FormGroup({
     text: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
+    idGroupeA: new FormControl(''),
   })
 
   submit(){
