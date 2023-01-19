@@ -8,7 +8,7 @@ Once project cloned , do not forget scaffolding :
 
                   For spring boot (Pour spring boot)  => mvn clean install 
 
-                  For Angular (Pour angular )  => npm install 
+                  For Angular (Pour angular )  => npm install  --force
 
 
 
