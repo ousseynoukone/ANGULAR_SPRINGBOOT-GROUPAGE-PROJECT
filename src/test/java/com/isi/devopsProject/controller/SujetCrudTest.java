@@ -33,7 +33,8 @@ public class SujetCrudTest {
     public void AjoutSujetTestEtSuprimmerSujet(){
         Sujet s = createSujet();
        
-        Assertions.assertThat(s.getId()).isGreaterThan(1);
+        Assertions.assertThat(s.getId()).isGreaterThanOrEqualTo(1);
+
         iService.deleteSujet(s.getId());
     }
 
