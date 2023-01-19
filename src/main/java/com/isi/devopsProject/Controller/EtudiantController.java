@@ -80,7 +80,7 @@ public List<Map<String,Object>> getGroupe(@RequestParam(required = false, defaul
         for (List<Etudiant> group : groups) {
             for (Etudiant e : group) {
                 e.setIdGroupe(lSujet.get(index).getId());
-                IEtudiantService.updateEtudiant(e, e.getId());
+             //   IEtudiantService.updateEtudiant(e, e.getId());
             }
             index++;
             if(index == lSujet.size()){
