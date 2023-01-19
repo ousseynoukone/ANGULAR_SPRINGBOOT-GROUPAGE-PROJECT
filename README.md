@@ -1,4 +1,5 @@
 # devopsProject---Copie
+#IMPORTANT ! Veuillez creer la base de donnée devops avant de run le projet
 Une fois le projet cloné ou telechagé , n'oubliez pas de reinstaller les composants :
 Once project cloned , do not forget scaffolding : 
 
